@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&family=Open+Sans:wght@300;400;700&family=Poppins:wght@200;300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-poppins bg-bodyWhite text-sm text-[#777];
+  }
+  p {
+    @apply text-sm text-[#777];
+  }
+  img {
+    @apply max-w-full max-h-full;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-[#333];
+  }
+}
+
+@layer components {
+  .btn {
+    @apply flex items-center justify-center w-32 px-4 py-2 text-white rounded-sm bg-primary;
+  }
+}

@@ -6,10 +6,15 @@
 
 @layer base {
   body {
-    @apply font-poppins bg-bodyWhite text-sm text-[#777];
+    @apply font-poppins bg-bodyWhite text-sm text-[#666];
   }
-  p {
-    @apply text-sm text-[#777];
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-[#333];
   }
   img {
     @apply max-w-full max-h-full;

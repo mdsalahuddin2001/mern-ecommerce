@@ -6,11 +6,13 @@ const Navbar = () => {
       <div class="container">
         <div class="flex">
           {/* <!-- all category --> */}
-          <div class="px-8 py-4 bg-primary flex items-center cursor-pointer group relative">
-            <span>
-              <i class="fas fa-bars"></i>
-            </span>
-            <span class="capitalize ml-2 ">All categories</span>
+          <div class="flex items-end cursor-pointer group relative h-[60px]">
+            <div className="bg-white h-[90%] px-8 flex items-center rounded-t-md">
+              <span>
+                <i class="fas fa-bars"></i>
+              </span>
+              <span class="capitalize ml-2 ">All categories</span>
+            </div>
 
             <div class="absolute left-0 top-full w-full bg-white shadow-md py-3 invisible opacity-0 group-hover:opacity-100 group-hover:visible transition duration-300 z-50 divide-y divide-gray-300 divide-dashed">
               {/* <!-- single category --> */}

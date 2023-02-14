@@ -31,6 +31,15 @@
 
 @layer components {
   .btn {
-    @apply flex items-center justify-center w-32 px-4 py-2 text-white rounded-sm bg-primary;
+    @apply flex items-center justify-center px-6 py-2 text-center text-white capitalize transition rounded-sm bg-primary hover:bg-primaryHover;
+  }
+  .label-basic {
+    @apply block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase;
+  }
+  .input-basic {
+    @apply block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 rounded appearance-none focus:outline-none focus:bg-white;
+  }
+  .textarea-basic {
+    @apply block w-full h-32 px-4 py-3 leading-tight text-gray-700 bg-gray-200 rounded appearance-none focus:outline-none focus:bg-white;
   }
 }

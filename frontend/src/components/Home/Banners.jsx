@@ -12,31 +12,31 @@ const Banners = () => {
         <img src="/images/banners/banner-3.png" alt="banner" />
       </div> */}
       <div className="container">
-        <div class=" xl:flex  xl:h-[600px]  my-[30px]">
-          <div class="xl:w-[740px] w-full h-auto">
+        <div className=" xl:flex  xl:h-[600px]  my-[30px]">
+          <div className="xl:w-[740px] w-full h-auto">
             <a href="/single-product">
               <img
                 src="/images/banners/banner-1.png"
                 alt=""
-                class="w-full max-w-full h-full"
+                className="w-full max-w-full h-full"
               />
             </a>
           </div>
-          <div class="flex-1 flex xl:flex-col flex-row">
-            <div class="w-full xl:h-1/2">
+          <div className="flex-1 flex xl:flex-col flex-row">
+            <div className="w-full xl:h-1/2">
               <a href="/single-product">
                 <img
                   src="/images/banners/banner-2.png"
-                  class="w-full object-cover"
+                  className="w-full object-cover"
                   alt="banner"
                 />
               </a>
             </div>
-            <div class="w-full xl:h-1/2 ">
+            <div className="w-full xl:h-1/2 ">
               <a href="/single-product">
                 <img
                   src="/images/banners/banner-3.png"
-                  class="w-full object-cover"
+                  className="w-full object-cover"
                   alt="banner"
                 />
               </a>

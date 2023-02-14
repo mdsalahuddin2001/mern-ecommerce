@@ -5,25 +5,25 @@ const routes = [
   {
     id: 1,
     name: "Dashboard",
-    link: "/",
+    link: "/admin",
     icon: <AiOutlineBarChart />,
   },
   {
     id: 2,
     name: "Users",
-    link: "/users",
+    link: "/admin/users",
     icon: <HiUsers />,
   },
   {
     id: 3,
     name: "Products",
-    link: "/products",
+    link: "/admin/products",
     icon: <IoMdLaptop />,
   },
   {
     id: 4,
     name: "Orders",
-    link: "/orders",
+    link: "/admin/orders",
     icon: <IoMdCart />,
   },
 ];

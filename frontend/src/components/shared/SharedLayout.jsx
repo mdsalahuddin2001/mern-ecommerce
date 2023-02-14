@@ -9,7 +9,7 @@ const SharedLayout = () => {
         <Sidebar />
         <div className="flex-grow">
           <Navbar />
-          <div className="w-full p-4">
+          <div className="w-full p-4 overflow-auto">
             <Outlet />
           </div>
         </div>

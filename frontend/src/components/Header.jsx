@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import { AiOutlineHeart, AiOutlineSearch } from "react-icons/ai";
 import { RiAccountCircleLine } from "react-icons/ri";
+import { useSelector } from "react-redux";
 import logo from "../assets/logo.png";
 import { FiShoppingBag } from "react-icons/fi";
 import Navbar from "./Navbar";
 const Header = () => {
+  const { totalItems } = useSelector((state) => state.cart);
   return (
     <>
-      <header className="py-4  shadow-sm bg-white">
+      <header className="py-4 bg-white shadow-sm">
         <div className="container flex items-center justify-between">
           {/* <!-- logo --> */}
           <Link to="/" className="block w-10">
@@ -17,7 +19,7 @@ const Header = () => {
 
           {/* <!-- searchbar --> */}
           <div className="relative hidden w-full xl:max-w-xl lg:max-w-lg lg:flex">
-            <span className="absolute text-lg text-gray-400 top-1/2 left-4 -translate-y-1/2">
+            <span className="absolute text-lg text-gray-400 -translate-y-1/2 top-1/2 left-4">
               <AiOutlineSearch className="text-xl" />
             </span>
             <input
@@ -38,7 +40,7 @@ const Header = () => {
           <div className="flex items-center space-x-4">
             <Link
               to="/wishlist"
-              className="flex flex-col justify-center items-center text-center  transition hover:text-primary space-y-1"
+              className="flex flex-col items-center justify-center space-y-1 text-center transition hover:text-primary"
             >
               <div className="relative">
                 <span className="absolute flex items-center justify-center w-5 h-5 text-xs text-white rounded-full left-4 -top-2 bg-primary">
@@ -52,11 +54,11 @@ const Header = () => {
             </Link>
             <Link
               to="/cart"
-              className="flex flex-col justify-center items-center text-center  transition hover:text-primary space-y-1"
+              className="flex flex-col items-center justify-center space-y-1 text-center transition hover:text-primary"
             >
               <div className="relative">
                 <span className="absolute flex items-center justify-center w-5 h-5 text-xs text-white rounded-full left-4 -top-2 bg-primary">
-                  3
+                  {totalItems}
                 </span>
                 <div className="text-2xl">
                   <FiShoppingBag />
@@ -67,7 +69,7 @@ const Header = () => {
             </Link>
             <Link
               href="/profile"
-              className="flex flex-col justify-center items-center text-center  transition hover:text-primary space-y-1"
+              className="flex flex-col items-center justify-center space-y-1 text-center transition hover:text-primary"
             >
               <div className="text-2xl">
                 <RiAccountCircleLine />

@@ -1,13 +1,17 @@
-import Header from "../../components/Header";
 import Banners from "../../components/Home/Banners";
-import Products from "../../components/Home/Products";
-
+import Products from "../../components/Products/ProductsGrid";
+import { useGetProductsQuery } from "../../features/products/productsApi";
 const Home = () => {
+  const { isLoading, data, isError, error } = useGetProductsQuery();
   return (
     <>
-      <Header />
       <Banners />
-      <Products />
+      <Products
+        isLoading={isLoading}
+        data={data}
+        isError={isError}
+        error={error}
+      />
     </>
   );
 };

@@ -1,12 +1,27 @@
 import { apiSlice } from "../api/apiSlice";
 
-import { userLoggedIn } from "./authSlice";
+import { userLoggedIn, userLoggedOut } from "./authSlice";
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    logout: builder.mutation({
+      query: () => ({
+        url: "/auth/logout",
+        method: "POST",
+      }),
+
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          dispatch(userLoggedOut());
+          await queryFulfilled;
+        } catch (err) {
+          //
+        }
+      },
+    }),
     login: builder.mutation({
       query: (data) => ({
-        url: "/auth/admin-login",
+        url: "/auth/login",
         method: "POST",
         body: data,
       }),
@@ -28,4 +43,4 @@ export const authApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useLogoutMutation } = authApi;

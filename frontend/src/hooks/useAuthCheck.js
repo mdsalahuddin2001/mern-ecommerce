@@ -8,7 +8,6 @@ export default function useAuthCheck() {
 
   useEffect(() => {
     const localAuth = localStorage?.getItem("auth");
-
     if (localAuth) {
       const auth = JSON.parse(localAuth);
       if (auth?.accessToken && auth?.user) {
@@ -21,7 +20,7 @@ export default function useAuthCheck() {
       }
     }
     setAuthChecked(true);
-  }, [dispatch, setAuthChecked]);
+  }, [dispatch]);
 
   return authChecked;
 }

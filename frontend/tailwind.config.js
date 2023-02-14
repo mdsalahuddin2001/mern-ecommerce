@@ -44,8 +44,11 @@ module.exports = {
         bodyDark: "#383d52",
         card: "#fff",
         primaryDark: "#2a2e3f",
+        green: "#4ADE80",
+        yellow: "#FFBF00",
+        red: "#F87171",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };

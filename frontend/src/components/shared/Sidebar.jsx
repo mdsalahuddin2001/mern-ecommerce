@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Logo from "../Logo";
 import SidebarLinks from "./SidebarLinks";
 
@@ -13,7 +14,9 @@ const Sidebar = () => {
     >
       {/* sidebar header */}
       <div className="h-[80px] flex items-center justify-center">
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
       </div>
       {/* sidebar links */}
       <SidebarLinks />

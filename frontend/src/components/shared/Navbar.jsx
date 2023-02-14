@@ -22,19 +22,21 @@ const Navbar = () => {
           type="button"
           onClick={handleToggleSidebar}
         >
-          <FaAlignLeft className="text-primary" />
+          <FaAlignLeft className="text-lg text-primary" />
         </button>
         <div className="space-x-4">
           <button onClick={handleToggleDarkMode}>
             {isDarkMode ? (
-              <BsSunFill className="text-white" />
+              <BsSunFill className="text-lg text-white" />
             ) : (
-              <BsFillMoonFill className="text-textPrimary" />
+              <BsFillMoonFill className="text-lg text-textPrimary" />
             )}
           </button>
           <button onClick={() => dispatch(userLoggedOut())}>
             <FiLogIn
-              className={isDarkMode ? "text-white" : "text-textPrimary"}
+              className={`text-lg ${
+                isDarkMode ? "text-white" : "text-textPrimary"
+              }`}
             />
           </button>
         </div>

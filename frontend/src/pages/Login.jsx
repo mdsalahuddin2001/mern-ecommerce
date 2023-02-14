@@ -2,13 +2,14 @@ import { useState } from "react";
 import Logo from "../components/Logo";
 import LoginHero from "../assets/svg/login-illustration.svg";
 import ButtonLoader from "../components/ui/loaders/ButtonLoader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { useLoginMutation } from "../features/auth/authApi";
 import { useEffect } from "react";
 import Alert from "../components/ui/Alert";
+import { useSelector } from "react-redux";
 
 const loginFormSchema = Yup.object().shape({
   email: Yup.string()
@@ -25,15 +26,21 @@ const initialValues = {
 const Login = () => {
   const [loginError, setLoginError] = useState(null);
   const [login, { isLoading, error }] = useLoginMutation();
-
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   useEffect(() => {
     if (error?.data?.message) {
       setLoginError(error?.data?.message);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
   // login submit handler
   const handleSubmit = (values) => {
-    console.log(values);
     login(values)
       .unwrap()
       .then((data) => {

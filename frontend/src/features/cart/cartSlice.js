@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-hot-toast";
 const getCartFromStorage = () => {
   let cart = localStorage.getItem("cart");
   if (cart) {
@@ -50,6 +51,7 @@ const cartSlice = createSlice({
           max: action.payload.countInStock,
         });
       }
+      toast.success("Item added to cart");
     },
     /*____ Remove Item From The Cart ____*/
     removeCartItem: (state, action) => {

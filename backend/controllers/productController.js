@@ -1,5 +1,6 @@
 const slugify = require("slugify");
 const Product = require("../models/Product");
+const ErrorResponse = require("../utils/errorResponse");
 
 // @desc      Get Products
 // @route     POST /api/v1/products
@@ -12,14 +13,23 @@ exports.getProducts = async (req, res, next) => {
 // @route     POST /api/v1/products/:id
 // @access    Public
 exports.getSingleProduct = async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id).populate(["category"]);
+  res.status(200).json(product);
+};
+// @desc      Delete Product By Id
+// @route     DELETE /api/v1/products/:id
+// @access    Private
+exports.deleteProduct = async (req, res, next) => {
+  const product = await Product.findByIdAndDelete(req.params.id);
+  if (!product) {
+    return next(new ErrorResponse("Product not found!"));
+  }
   res.status(200).json(product);
 };
 // @desc      Add Product
 // @route     POST /api/v1/products
 // @access    Private
 exports.addProduct = async (req, res, next) => {
-  console.log(req.body);
   const productBody = {
     name: req.body.name,
     slug: slugify(req.body.name),
@@ -37,20 +47,20 @@ exports.addProduct = async (req, res, next) => {
   res.status(200).json(product);
 };
 // @desc      Update Product
-// @route     POST /api/v1/products/:id
+// @route     PATCH /api/v1/products/:id
 // @access    Private
 exports.updateProduct = async (req, res, next) => {
   const productBody = {
-    name: req.body.name,
-    slug: slugify(req.body.name),
-    image: req.body.image,
-    price: req.body.price,
-    category: req.body.category,
-    countInStock: req.body.countInStock,
-    description: req.body.description,
+    ...req.body,
     updatedBy: req?.user?._id || "63db31595059dd9f22535a8b",
   };
+  console.log(req.body);
+  if (req.body.name) {
+    productBody.slug = slugify(req.body.name);
+  }
   //   Add product
-  const product = await Product.create(productBody);
+  const product = await Product.findByIdAndUpdate(req.params.id, productBody, {
+    new: true,
+  });
   res.status(200).json(product);
 };

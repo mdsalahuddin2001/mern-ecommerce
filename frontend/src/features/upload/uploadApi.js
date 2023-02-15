@@ -2,7 +2,7 @@ import { apiSlice } from "../api/apiSlice";
 
 export const uploadApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // add product
+    // upload image, here data is FormData
     upload: builder.mutation({
       query: (data) => {
         return {

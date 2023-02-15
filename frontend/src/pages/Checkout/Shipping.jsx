@@ -42,13 +42,16 @@ const Shipping = () => {
             <Form className="max-w-[600px] space-y-3">
               {/* name */}
               <div>
-                <label htmlFor="name">Full Name</label>
+                <label className="label-basic" htmlFor="name">
+                  Full Name
+                </label>
                 <Field
-                  className={
-                    errors.name && touched.name
-                      ? "border border-red-400 bg-white"
-                      : null
-                  }
+                  className={`input-basic
+                    ${
+                      errors.name && touched.name
+                        ? "border border-red-400 bg-white"
+                        : null
+                    }`}
                   id="name"
                   name="name"
                 />
@@ -62,13 +65,15 @@ const Shipping = () => {
               </div>
               {/* email */}
               <div>
-                <label htmlFor="email">Email</label>
+                <label className="label-basic" htmlFor="email">
+                  Email
+                </label>
                 <Field
-                  className={
+                  className={`input-basic ${
                     errors.email && touched.email
                       ? "border border-red-400 bg-white"
                       : null
-                  }
+                  }`}
                   id="email"
                   name="email"
                 />
@@ -82,18 +87,19 @@ const Shipping = () => {
               </div>
               {/* Address */}
               <div>
-                <label className="shippingAddress" htmlFor="shippingAddress">
+                <label className="label-basic" htmlFor="shippingAddress">
                   Shipping Address
                 </label>
                 <Field
                   as="textarea"
                   id="shippingAddress"
                   name="shippingAddress"
-                  className={
-                    errors.shippingAddress && touched.shippingAddress
-                      ? "border border-red-400 bg-white"
-                      : null
-                  }
+                  className={`textarea-basic
+                    ${
+                      errors.shippingAddress && touched.shippingAddress
+                        ? "border border-red-400 bg-white"
+                        : "border-none"
+                    }`}
                 />
                 <ErrorMessage
                   component="div"
@@ -107,15 +113,18 @@ const Shipping = () => {
               </div>
               {/* Phone Number */}
               <div>
-                <label htmlFor="phone">Phone Number</label>
+                <label className="label-basic" htmlFor="phone">
+                  Phone Number
+                </label>
                 <Field
                   id="phone"
                   name="phone"
-                  className={
-                    errors.phone && touched.phone
-                      ? "border border-red-400 bg-white"
-                      : null
-                  }
+                  className={`input-basic
+                    ${
+                      errors.phone && touched.phone
+                        ? "border border-red-400 bg-white"
+                        : null
+                    }`}
                 />
                 <ErrorMessage
                   component="div"

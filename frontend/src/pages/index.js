@@ -18,6 +18,9 @@ import PlaceOrder from "./Checkout/PlaceOrder";
 import Order from "./Order/Order";
 import AdminProtect from "./ProtectAdmin";
 import AddProduct from "./dashboard/Products/AddProduct";
+import EditProduct from "./dashboard/Products/EditProduct";
+import Profile from "./Profile/Profile";
+import ProfileOrders from "./Profile/Orders";
 
 export {
   Protect,
@@ -38,4 +41,7 @@ export {
   PlaceOrder,
   Order,
   AddProduct,
+  EditProduct,
+  Profile,
+  ProfileOrders,
 };

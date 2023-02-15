@@ -15,7 +15,6 @@ const Order = () => {
   const { isLoading, data, isError, error } = useGetOrderQuery(orderId);
   const [makePayment, { isLoading: paymentLoading, data: paymentUrl }] =
     useMakePaymentMutation(orderId);
-  console.log(paymentUrl);
   useEffect(() => {
     if (paymentUrl) {
       window.location.replace(paymentUrl);
@@ -36,8 +35,6 @@ const Order = () => {
   } else if (isError) {
     content = <Alert type="danger">{error?.data?.message}</Alert>;
   } else if (data && data?._id) {
-    const {} = data;
-
     content = (
       <div className="items-start grid-cols-12 gap-6 pt-4 pb-16 lg:grid">
         <div className="xl:col-span-9 lg:col-span-8">

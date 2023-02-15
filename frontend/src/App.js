@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HeaderWrapper from "./components/HeaderWrapper";
+import ProfileLayout from "./components/Profile/ProfileLayout";
 import NotFound from "./components/ui/NotFound";
 import { countTotal } from "./features/cart/cartSlice";
 import useAuthCheck from "./hooks/useAuthCheck";
@@ -24,6 +25,9 @@ import {
   Order,
   AdminProtect,
   AddProduct,
+  Profile,
+  ProfileOrders,
+  EditProduct,
 } from "./pages";
 
 function App() {
@@ -58,6 +62,7 @@ function App() {
               <Route path="users" element={<Users />} />
               <Route path="products" element={<Products />} />
               <Route path="products/add" element={<AddProduct />} />
+              <Route path="products/edit/:id" element={<EditProduct />} />
               <Route path="orders" element={<Orders />} />
             </Route>
             {/* Wrapper for protected Routes ends */}
@@ -73,6 +78,10 @@ function App() {
                   <Route path="payment-method" element={<PaymentMethod />} />
                   <Route path="place-order" element={<PlaceOrder />} />
                   <Route path="orders/:orderId" element={<Order />} />
+                  <Route path="/profile" element={<ProfileLayout />}>
+                    <Route index element={<Profile />} />
+                    <Route path="orders" element={<ProfileOrders />} />
+                  </Route>
                 </Route>
               </Route>
               <Route path="forgot-password" element={<ForgotPassword />} />

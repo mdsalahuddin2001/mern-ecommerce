@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import AsyncSelect from "react-select/async";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAddProductMutation } from "../../../features/products/productsApi";
 import ButtonLoader from "../../../components/ui/loaders/ButtonLoader";
@@ -29,7 +29,6 @@ const formSchema = Yup.object().shape({
   image: Yup.string().required("Product image is required!"),
 });
 const AddProduct = () => {
-  const [uploadedFile, setUploadedFile] = useState(null);
   const formikRef = useRef();
   const [addProduct, { isLoading, isSuccess }] = useAddProductMutation();
   const [upload, { isLoading: uploadLoading, data }] = useUploadMutation();

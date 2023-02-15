@@ -1,40 +1,37 @@
-import {
-  useDeleteProductMutation,
-  useGetProductsQuery,
-} from "../../features/products/productsApi";
+import { useGetMyOrdersQuery } from "../../features/orders/ordersApi";
 import TableLoader from "../../components/ui/loaders/TableLoader";
 import Alert from "../../components/ui/Alert";
+import { AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { FiEdit } from "react-icons/fi";
-import { RiDeleteBin6Fill } from "react-icons/ri";
-const Products = () => {
-  const { data, isLoading, isError, error } = useGetProductsQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  });
-  const [deleteProduct] = useDeleteProductMutation();
+import moment from "moment";
+import numberWithCommas from "../../utils/numberWithCommas";
+
+const statusBadge = (status) => {
+  return status === "delivered" ? (
+    <span className="px-4 py-1 text-xs font-bold text-[#4ADE80] rounded-full bg-[#4ADE80]/10">
+      Delivered
+    </span>
+  ) : status === "cancelled" ? (
+    <span className="px-4 py-1 text-xs font-bold text-[#F87171] rounded-full bg-[#F87171]/10">
+      Cancelled
+    </span>
+  ) : (
+    <span className="px-4 py-1 text-xs rounded-full bg-[#FFBF00]/10 text-[#FFBF00] font-bold">
+      Pending
+    </span>
+  );
+};
+const Orders = () => {
+  const { isLoading, data, isError, error } = useGetMyOrdersQuery();
+
   // decide what to render
   let content = null;
+
   if (isLoading && !isError) {
-    content = (
-      <div>
-        <TableLoader />
-      </div>
-    );
+    content = <TableLoader />;
   } else if (isError) {
-    content = (
-      <div>
-        <Alert type="danger">
-          {error?.data?.message || "Something went wrong!"}
-        </Alert>
-      </div>
-    );
-  } else if (data?.products?.length < 1) {
-    content = (
-      <div>
-        <Alert type="danger">No product found.</Alert>
-      </div>
-    );
-  } else if (data && data?.products?.length > 0) {
+    content = <Alert>{error?.data?.message}</Alert>;
+  } else if (data && data?.orders) {
     content = (
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
@@ -58,88 +55,69 @@ const Products = () => {
                 <table className="min-w-full divide-y divide-gray-300">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th
+                      {/* <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Name
+                        ID
+                      </th> */}
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        DATE
                       </th>
                       <th
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Price
+                        TOTAL PRICE
                       </th>
                       <th
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Quantity
+                        STATUS
                       </th>
                       <th
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                      ></th>
-                      <th
-                        scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Actions
+                        ACTION
                       </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {data?.products?.map((product) => (
-                      <tr key={product._id}>
-                        <td className="py-4 pl-4 pr-3 text-sm whitespace-nowrap sm:pl-6">
+                    {data?.orders?.map((order) => (
+                      <tr key={order._id}>
+                        {/* <td className="py-4 pl-4 pr-3 text-sm whitespace-nowrap sm:pl-6">
                           <div className="flex items-center">
                             <div className="flex-shrink-0 w-10 h-10">
-                              <img
-                                className="w-10 h-10 rounded-full"
-                                src={product.image}
-                                alt={product.name}
-                              />
-                            </div>
-                            <div className="ml-4">
-                              <div className="font-medium text-gray-900">
-                                {product.name}
-                              </div>
-                              <div className="text-gray-500">
-                                {/* {product.price} */}
-                              </div>
+                              {order._id}
                             </div>
                           </div>
-                        </td>
+                        </td> */}
                         <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                           <div className="text-gray-900">
-                            BDT {product.price}
-                          </div>
-                          <div className="text-gray-500">
-                            {/* {product.department} */}
+                            {moment(order.createdAt).format("MMM Do YYYY")}
                           </div>
                         </td>
                         <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
-                          {/* <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                            Active
-                          </span> */}
-                          {product.countInStock}
+                          BDT {numberWithCommas(order.totalPrice)}
                         </td>
                         <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
-                          {product.role}
+                          {statusBadge(order.status)}
                         </td>
                         <td className="relative py-4 pl-3 pr-4 text-sm font-medium text-right whitespace-nowrap sm:pr-6">
-                          <div className="flex items-center space-x-4">
+                          <div className="flex items-center space-x-2">
                             <Link
-                              to={`/admin/products/edit/${product._id}`}
-                              className="text-lg text-green hover:text-green"
+                              to={`/orders/${order._id}`}
+                              className="flex items-center px-4 py-1 text-xs text-white text-green-400 bg-black rounded hover:text-green-600"
                             >
-                              <FiEdit />
+                              <AiFillEye className="mr-1 text-lg" /> Details
                             </Link>
-                            <button
-                              className="text-lg text-red hover:text-red"
-                              onClick={() => deleteProduct(product._id)}
-                            >
-                              <RiDeleteBin6Fill />
+                            <button className="text-lg text-red-400 hover:text-red-600">
+                              {/* <RiDeleteBin6Fill /> */}
                             </button>
                           </div>
                         </td>
@@ -154,7 +132,6 @@ const Products = () => {
       </div>
     );
   }
-
   return <div>{content}</div>;
 };
-export default Products;
+export default Orders;

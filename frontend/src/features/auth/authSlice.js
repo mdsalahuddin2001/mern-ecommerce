@@ -10,7 +10,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     userLoggedIn: (state, action) => {
-      state.accessToken = action.payload;
+      state.accessToken = action.payload.accessToken;
       state.user = action.payload.user;
       //   set auth info to the local storage when logged in
       localStorage.setItem(

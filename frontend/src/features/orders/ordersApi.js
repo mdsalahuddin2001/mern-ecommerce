@@ -8,6 +8,18 @@ export const ordersApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    getMyOrders: builder.query({
+      query: () => ({
+        url: `/orders/mine`,
+        method: "GET",
+      }),
+    }),
+    getOrders: builder.query({
+      query: () => ({
+        url: `/orders`,
+        method: "GET",
+      }),
+    }),
     placeOrder: builder.mutation({
       query: (data) => ({
         url: "/orders",
@@ -18,4 +30,9 @@ export const ordersApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { usePlaceOrderMutation, useGetOrderQuery } = ordersApi;
+export const {
+  usePlaceOrderMutation,
+  useGetOrderQuery,
+  useGetMyOrdersQuery,
+  useGetOrdersQuery,
+} = ordersApi;

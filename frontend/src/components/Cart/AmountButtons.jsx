@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { toggleItemAmount } from "../../features/cart/cartSlice";
+
 const AmountButtons = ({ amount, _id }) => {
   const dispatch = useDispatch();
 

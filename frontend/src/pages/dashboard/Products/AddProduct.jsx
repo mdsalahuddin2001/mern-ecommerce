@@ -8,7 +8,7 @@ import ButtonLoader from "../../../components/ui/loaders/ButtonLoader";
 import { useUploadMutation } from "../../../features/upload/uploadApi";
 // load categories
 const loadCategoryOptions = (inputValue, callback) => {
-  fetch("http://localhost:5000/api/v1/categories")
+  fetch(`${process.env.REACT_APP_API_URL}/categories`)
     .then((response) => response.json())
     .then((data) => {
       callback(data.categories);

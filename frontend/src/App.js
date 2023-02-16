@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Contact from "./components/About/Contact";
+import Team from "./components/About/Team";
 import HeaderWrapper from "./components/HeaderWrapper";
 import ProfileLayout from "./components/Profile/ProfileLayout";
+import Footer from "./components/shared/Footer";
 import NotFound from "./components/ui/NotFound";
 import { countTotal } from "./features/cart/cartSlice";
 import useAuthCheck from "./hooks/useAuthCheck";
@@ -71,6 +74,8 @@ function App() {
             <Route path="/" element={<Public />}>
               <Route path="/" element={<HeaderWrapper />}>
                 <Route index element={<Home />} />
+                <Route path="team" element={<Team/>} />
+                <Route path="contact" element={<Contact />} />
                 <Route path="products/:id" element={<Product />} />
                 <Route path="cart" element={<Cart />} />
                 <Route path="/" element={<Protect />}>
@@ -89,6 +94,7 @@ function App() {
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Footer></Footer>
         </BrowserRouter>
       </div>
     </div>

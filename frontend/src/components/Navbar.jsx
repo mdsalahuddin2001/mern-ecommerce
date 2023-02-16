@@ -111,6 +111,9 @@ const Navbar = () => {
               <Link to="/about" className="transition hover:text-gray-900">
                 About us
               </Link>
+              <Link to="/team" className="transition hover:text-gray-900">
+                Team
+              </Link>
               <Link
                 to="/contact"
                 className="text-gray-700 transition hover:text-gray-900"

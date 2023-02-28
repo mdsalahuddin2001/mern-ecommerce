@@ -28,6 +28,7 @@ import {
   Profile,
   ProfileOrders,
   EditProduct,
+  Shop,
 } from "./pages";
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
             <Route path="/" element={<Public />}>
               <Route path="/" element={<HeaderWrapper />}>
                 <Route index element={<Home />} />
+                <Route path="shop" element={<Shop />} />
                 <Route path="products/:id" element={<Product />} />
                 <Route path="cart" element={<Cart />} />
                 <Route path="/" element={<Protect />}>

@@ -62,6 +62,33 @@ export const productsApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    // add review
+    reviewProduct: builder.mutation({
+      query: (data) => {
+        return {
+          url: `/products/${data.productId}/reviews`,
+          method: "POST",
+          body: data.review,
+        };
+      },
+      onQueryStarted: async (arg, { queryFulfilled, dispatch }) => {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(
+            apiSlice.util.updateQueryData(
+              "getProduct",
+              arg.productId,
+              (draft) => {
+                console.log("draft", JSON.parse(JSON.stringify(draft)));
+                console.log(data);
+                draft.reviews = [data.review, ...draft.reviews];
+                return draft;
+              }
+            )
+          );
+        } catch (error) {}
+      },
+    }),
   }),
 });
 
@@ -71,4 +98,5 @@ export const {
   useAddProductMutation,
   useDeleteProductMutation,
   useUpdateProductMutation,
+  useReviewProductMutation,
 } = productsApi;

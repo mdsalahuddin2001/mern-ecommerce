@@ -5,6 +5,7 @@ const {
   addProduct,
   deleteProduct,
   updateProduct,
+  reviewProduct,
 } = require("../controllers/productController");
 const { protect, authorize } = require("../middlewares/auth");
 const router = express.Router();
@@ -14,6 +15,7 @@ const router = express.Router();
 // admin & super admin
 router.route("/").get(getProducts).post(addProduct);
 // .post(protect, authorize("admin"), addProduct);
+router.route("/:id/reviews").post(protect, reviewProduct);
 router
   .route("/:id")
   .get(getSingleProduct)

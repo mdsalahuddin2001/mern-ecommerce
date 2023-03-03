@@ -49,7 +49,7 @@ const Shipping = () => {
                   className={`input-basic
                     ${
                       errors.name && touched.name
-                        ? "border border-red-400 bg-white"
+                        ? "border border-red bg-white"
                         : null
                     }`}
                   id="name"
@@ -57,9 +57,7 @@ const Shipping = () => {
                 />
                 <ErrorMessage
                   component="div"
-                  className={
-                    errors.name && touched.name ? "text-red-400" : null
-                  }
+                  className={errors.name && touched.name ? "text-red" : null}
                   name="name"
                 />
               </div>
@@ -71,7 +69,7 @@ const Shipping = () => {
                 <Field
                   className={`input-basic ${
                     errors.email && touched.email
-                      ? "border border-red-400 bg-white"
+                      ? "border border-red bg-white"
                       : null
                   }`}
                   id="email"
@@ -79,9 +77,7 @@ const Shipping = () => {
                 />
                 <ErrorMessage
                   component="div"
-                  className={
-                    errors.name && touched.name ? "text-red-400" : null
-                  }
+                  className={errors.name && touched.name ? "text-red" : null}
                   name="email"
                 />
               </div>
@@ -97,7 +93,7 @@ const Shipping = () => {
                   className={`textarea-basic
                     ${
                       errors.shippingAddress && touched.shippingAddress
-                        ? "border border-red-400 bg-white"
+                        ? "border border-red bg-white"
                         : "border-none"
                     }`}
                 />
@@ -106,7 +102,7 @@ const Shipping = () => {
                   name="shippingAddress"
                   className={
                     errors.shippingAddress && touched.shippingAddress
-                      ? "text-red-400"
+                      ? "text-red"
                       : null
                   }
                 />
@@ -122,15 +118,13 @@ const Shipping = () => {
                   className={`input-basic
                     ${
                       errors.phone && touched.phone
-                        ? "border border-red-400 bg-white"
+                        ? "border border-red bg-white"
                         : null
                     }`}
                 />
                 <ErrorMessage
                   component="div"
-                  className={
-                    errors.phone && touched.phone ? "text-red-400" : null
-                  }
+                  className={errors.phone && touched.phone ? "text-red" : null}
                   name="phone"
                 />
               </div>

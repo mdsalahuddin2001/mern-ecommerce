@@ -30,7 +30,7 @@ const Product = () => {
       </div>
     );
   } else if (data && data.name) {
-    const { name, price, image, description, reviews } = data;
+    const { name, price, image, description, reviews, rating } = data;
     content = (
       <>
         <section class="text-gray-700 body-font overflow-hidden bg-white">
@@ -42,11 +42,11 @@ const Product = () => {
                 src={image}
               />
               <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-                <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
+                <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">
                   {name}
                 </h1>
-                <div>
-                  <Stars />
+                <div className="mb-4">
+                  <Stars rating={rating} />
                 </div>
                 <p class="leading-relaxed mb-4">{description}</p>
                 <div class="space-y-4">
@@ -66,16 +66,20 @@ const Product = () => {
             </div>
             <div className="flex items-center my-6 space-x-8">
               <button
-                className={`transition-all duration-300 pb-1 border-b-2 border-b-transparent ${
-                  activeTab === "description" ? "border-b-primary" : null
+                className={`transition-all duration-300 pb-1 border-b-2  ${
+                  activeTab === "description"
+                    ? "border-b-primary"
+                    : "border-b-transparent"
                 }`}
                 onClick={() => setActiveTab("description")}
               >
                 Description
               </button>
               <button
-                className={`transition-all duration-300  pb-1 border-b-2 border-b-transparent ${
-                  activeTab === "reviews" ? "border-b-primary" : null
+                className={`transition-all duration-300  pb-1 border-b-2  ${
+                  activeTab === "reviews"
+                    ? "border-b-primary"
+                    : "border-b-transparent"
                 }`}
                 onClick={() => setActiveTab("reviews")}
               >

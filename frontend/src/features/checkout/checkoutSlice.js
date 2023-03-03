@@ -9,6 +9,7 @@ const paymentMethodFromStorage = localStorage.getItem("paymentMethod")
   ? JSON.parse(localStorage.getItem("paymentMethod"))
   : "";
 
+console.log(localStorage.getItem("paymentMethod"));
 const initialState = {
   shippingAddress: shippingAddressFromStorage,
   paymentMethod: paymentMethodFromStorage,

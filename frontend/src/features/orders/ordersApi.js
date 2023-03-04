@@ -39,7 +39,7 @@ export const ordersApi = apiSlice.injectEndpoints({
         const patchResult = dispatch(
           apiSlice.util.updateQueryData("getOrders", undefined, (draft) => {
             draft.orders = draft.orders.map((order) =>
-              order.id === id ? { ...order, status } : order
+              order._id === id ? { ...order, status } : order
             );
           })
         );

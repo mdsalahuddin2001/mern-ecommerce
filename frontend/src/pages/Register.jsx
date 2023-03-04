@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
-import { useLoginMutation } from "../features/auth/authApi";
+import { useRegisterMutation } from "../features/auth/authApi";
 import { useEffect } from "react";
 import Alert from "../components/ui/Alert";
 import { useSelector } from "react-redux";
@@ -15,17 +15,19 @@ const loginFormSchema = Yup.object().shape({
   email: Yup.string()
     .required("Please provide email!")
     .email("Please provide a valid email"),
+  name: Yup.string().required("Please provide your password"),
   password: Yup.string().required("Please provide your password"),
 });
 
 // Initial Login Form Values
 const initialValues = {
+  name: "",
   email: "mdahmede442@gmail.com",
   password: "123456",
 };
-const Login = () => {
+const Register = () => {
   const [loginError, setLoginError] = useState(null);
-  const [login, { isLoading, error }] = useLoginMutation();
+  const [register, { isLoading, error }] = useRegisterMutation();
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {
@@ -41,10 +43,10 @@ const Login = () => {
   }, [user, navigate]);
   // login submit handler
   const handleSubmit = (values) => {
-    login(values)
+    register(values)
       .unwrap()
       .then((data) => {
-        toast.success("Welcome! Your login is successful");
+        toast.success("Welcome! Your registration is successful");
       });
   };
 
@@ -79,6 +81,24 @@ const Login = () => {
                       {loginError}
                     </Alert>
                   ) : null}
+                  {/* name */}
+                  <div className="relative z-0 w-full mb-6 group">
+                    <Field
+                      name="name"
+                      id="name"
+                      className="block py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-primary peer"
+                      placeholder=" "
+                    />
+                    <label
+                      htmlFor="name"
+                      className="peer-focus:font-medium absolute  text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                    >
+                      Name
+                    </label>
+                    {errors.name && touched.name ? (
+                      <p className="mt-4 text-sm text-red-400">{errors.name}</p>
+                    ) : null}
+                  </div>
                   {/* email */}
                   <div className="relative z-0 w-full mb-6 group">
                     <Field
@@ -122,21 +142,14 @@ const Login = () => {
                     ) : null}
                   </div>
                   <div className="mb-8 input-group">
-                    <Link
-                      to="/register"
-                      className="inline-block mb-2 text-primary"
-                    >
-                      Register
-                    </Link>
-                    <br />
-                    <Link to="/forgot-password" className="text-primary">
-                      Forgot Your Password?
+                    <Link to="/login" className="text-primary">
+                      Login
                     </Link>
                   </div>
                   <div className="input-group">
                     <button type="submit" className="btn">
                       {isLoading ? <ButtonLoader /> : null}
-                      Login
+                      Register
                     </button>
                   </div>
                 </Form>
@@ -148,4 +161,4 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+export default Register;

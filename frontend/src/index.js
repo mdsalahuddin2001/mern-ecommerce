@@ -16,11 +16,11 @@ root.render(
         toastOptions={{
           // Define default options
           className: "",
-          duration: 3500,
+          duration: 2000,
           style: {
             background: "#fff",
             color: "#777",
-            marginTop: "100px",
+            marginTop: "50px",
           },
 
           // Default options for specific types

@@ -288,7 +288,7 @@ const AddProduct = () => {
                     </div>
                     {values.image && (
                       <img
-                        className="max-w-[200px]"
+                        className="max-w-[200px] mt-8"
                         src={values.image}
                         alt=""
                       />

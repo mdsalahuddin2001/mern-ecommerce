@@ -30,6 +30,7 @@ import {
   EditProduct,
   Shop,
 } from "./pages";
+import Register from "./pages/Register";
 
 function App() {
   const { cartItems } = useSelector((state) => state.cart);
@@ -88,6 +89,7 @@ function App() {
               </Route>
               <Route path="forgot-password" element={<ForgotPassword />} />
               <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

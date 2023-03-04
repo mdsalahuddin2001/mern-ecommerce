@@ -40,7 +40,29 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    register: builder.mutation({
+      query: (data) => ({
+        url: "/auth/register",
+        method: "POST",
+        body: data,
+      }),
+
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          dispatch(
+            userLoggedIn({
+              accessToken: result.data.accessToken,
+              user: result.data.user,
+            })
+          );
+        } catch (err) {
+          //
+        }
+      },
+    }),
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation } = authApi;
+export const { useLoginMutation, useLogoutMutation, useRegisterMutation } =
+  authApi;

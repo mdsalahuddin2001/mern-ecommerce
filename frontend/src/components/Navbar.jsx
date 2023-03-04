@@ -140,16 +140,18 @@ const Navbar = () => {
                         </Link>
                       )}
                     </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <Link
-                          className={`${active && "text-primary"}`}
-                          to="/admin"
-                        >
-                          Dashboard
-                        </Link>
-                      )}
-                    </Menu.Item>
+                    {user?.role === "admin" && (
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            className={`${active && "text-primary"}`}
+                            to="/admin"
+                          >
+                            Dashboard
+                          </Link>
+                        )}
+                      </Menu.Item>
+                    )}
                     <Menu.Item>
                       {({ active }) => (
                         <span

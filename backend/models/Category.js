@@ -5,16 +5,13 @@ const categorySchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+    },
+    slug: {
+      type: String,
+      required: true,
       unique: true,
     },
-    // slug: {
-    //   type: String,
-    //   required: true,
-    //   unique: true,
-    // },
-    type: {
-      type: String,
-    },
+
     categoryImage: { type: String },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,

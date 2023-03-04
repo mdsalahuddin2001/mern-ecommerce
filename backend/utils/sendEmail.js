@@ -28,8 +28,8 @@ const apiKey = client.authentications["api-key"];
 apiKey.apiKey = process.env.SENDINBLUE_API_KEY;
 const tranEmailApi = new Sib.TransactionalEmailsApi();
 const sender = {
-  email: "mdsalahuddin46464@gmail.com",
-  name: "MD Salahuddin",
+  email: "touhidulislam066@gmail.com",
+  name: "MD Touhidul Islam",
 };
 
 const sendEmail = (data) => {

@@ -14,7 +14,7 @@ export default function CheckoutWizard({ activeStep = 0 }) {
       <ol className="border border-gray-300 divide-y divide-gray-300 rounded-md md:flex md:divide-y-0">
         {steps.map((step, stepIdx) => (
           <li key={step.name} className="relative md:flex-1 md:flex">
-            {step.status === "complete" ? (
+            {activeStep > stepIdx ? (
               <a href={step.href} className="flex items-center w-full group">
                 <span className="flex items-center px-6 py-4 text-sm font-medium">
                   <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-full bg-primary group-hover:bg-primary">
@@ -23,12 +23,16 @@ export default function CheckoutWizard({ activeStep = 0 }) {
                       aria-hidden="true"
                     />
                   </span>
-                  <span className="ml-4 text-sm font-medium text-gray-900">
+                  <span
+                    className={`ml-4 text-sm font-medium text-gray-900 ${
+                      stepIdx > activeStep ? "text-primary" : null
+                    }`}
+                  >
                     {step.name}
                   </span>
                 </span>
               </a>
-            ) : step.status === "current" ? (
+            ) : activeStep === stepIdx ? (
               <a
                 href={step.href}
                 className="flex items-center px-6 py-4 text-sm font-medium"

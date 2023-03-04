@@ -13,7 +13,20 @@ exports.getProducts = async (req, res, next) => {
 // @route     POST /api/v1/products/:id
 // @access    Public
 exports.getSingleProduct = async (req, res, next) => {
-  const product = await Product.findById(req.params.id).populate(["category"]);
+  const product = await Product.findById(req.params.id).populate([
+    {
+      path: "reviews",
+      model: "Review",
+      populate: {
+        path: "user",
+        model: "User",
+      },
+    },
+  ]);
+
+  if (!product) {
+    return next(new ErrorResponse("Product not found!", 404));
+  }
   res.status(200).json(product);
 };
 // @desc      Delete Product By Id
@@ -22,7 +35,7 @@ exports.getSingleProduct = async (req, res, next) => {
 exports.deleteProduct = async (req, res, next) => {
   const product = await Product.findByIdAndDelete(req.params.id);
   if (!product) {
-    return next(new ErrorResponse("Product not found!"));
+    return next(new ErrorResponse("Product not found!", 404));
   }
   res.status(200).json(product);
 };
@@ -54,7 +67,7 @@ exports.updateProduct = async (req, res, next) => {
     ...req.body,
     updatedBy: req?.user?._id || "63db31595059dd9f22535a8b",
   };
-  console.log(req.body);
+
   if (req.body.name) {
     productBody.slug = slugify(req.body.name);
   }
@@ -63,4 +76,30 @@ exports.updateProduct = async (req, res, next) => {
     new: true,
   });
   res.status(200).json(product);
+};
+// @desc      Review Product
+// @route     POST /api/v1/products/:id/reviews
+// @access    Private
+exports.reviewProduct = async (req, res, next) => {
+  const productId = req.params.id;
+  const product = await Product.findById(productId);
+  if (!product) {
+    return next(new ErrorResponse("Product not found", 404));
+  }
+  const review = {
+    user: req.user,
+    rating: Number(req.body.rating),
+    comment: req.body.comment,
+  };
+  product.reviews.push(review);
+  product.numReviews = product.reviews.length;
+  product.rating =
+    product.reviews.reduce((a, c) => c.rating + a, 0) / product.reviews.length;
+  const updatedProduct = await product.save();
+  res.status(201).json({
+    message: "Review success",
+    review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
+    numReviews: product.numReviews,
+    rating: product.rating,
+  });
 };

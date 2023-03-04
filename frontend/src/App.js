@@ -31,6 +31,7 @@ import {
   Profile,
   ProfileOrders,
   EditProduct,
+  Shop,
 } from "./pages";
 
 function App() {
@@ -76,6 +77,7 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path="team" element={<Team/>} />
                 <Route path="contact" element={<Contact />} />
+                <Route path="shop" element={<Shop />} />
                 <Route path="products/:id" element={<Product />} />
                 <Route path="cart" element={<Cart />} />
                 <Route path="/" element={<Protect />}>

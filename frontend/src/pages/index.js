@@ -21,6 +21,7 @@ import AddProduct from "./dashboard/Products/AddProduct";
 import EditProduct from "./dashboard/Products/EditProduct";
 import Profile from "./Profile/Profile";
 import ProfileOrders from "./Profile/Orders";
+import Shop from "./Shop/Shop";
 
 export {
   Protect,
@@ -44,4 +45,5 @@ export {
   EditProduct,
   Profile,
   ProfileOrders,
+  Shop,
 };

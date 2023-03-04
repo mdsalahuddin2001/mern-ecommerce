@@ -1,6 +1,6 @@
 const Stars = () => {
   return (
-    <div className="flex items-center mt-2.5 mb-5">
+    <div className="flex items-center ">
       <svg
         aria-hidden="true"
         className="w-5 h-5 text-primary"

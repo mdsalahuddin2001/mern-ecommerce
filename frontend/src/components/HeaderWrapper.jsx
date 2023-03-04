@@ -4,9 +4,9 @@ const HeaderWrapper = () => {
   return (
     <>
       <Header />
-      <div className="py-8">
+      <>
         <Outlet />
-      </div>
+      </>
     </>
   );
 };

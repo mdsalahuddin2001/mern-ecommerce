@@ -11,7 +11,7 @@ const ProductItem = ({ product }) => {
     dispatch(addToCart(product));
   };
   return (
-    <div className="w-full max-w-sm bg-white rounded-md shadow-cardShadow">
+    <div className="bg-white rounded-md  shadow-cardShadow">
       <Link
         to={`/products/${_id}`}
         className="flex items-center justify-center"

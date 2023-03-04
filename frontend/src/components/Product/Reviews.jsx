@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import { useReviewProductMutation } from "../../features/products/productsApi";
 import ButtonLoader from "../../components/ui/loaders/ButtonLoader";
@@ -7,13 +7,20 @@ import Rating from "./Rating";
 const Reviews = ({ productId, reviews }) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
-  const [reviewProduct, { isLoading }] = useReviewProductMutation();
+  const [reviewProduct, { isLoading, isSuccess }] = useReviewProductMutation();
   // handle review
   const handleReview = () => {
     if (rating > 0 && review) {
       reviewProduct({ productId, review: { rating, comment: review } });
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setRating(0);
+      setReview("");
+    }
+  }, [isSuccess]);
   return (
     <div>
       <Rating rating={rating} setRating={setRating} />

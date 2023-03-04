@@ -14,8 +14,10 @@ export const productsApi = apiSlice.injectEndpoints({
       query: (id) => ({
         url: `/products/${id}`,
         method: "GET",
+        endpointName: "customEndpointName",
       }),
     }),
+
     // add product
     addProduct: builder.mutation({
       query: (data) => {
@@ -81,6 +83,7 @@ export const productsApi = apiSlice.injectEndpoints({
               (draft) => {
                 console.log("draft", JSON.parse(JSON.stringify(draft)));
                 console.log(data);
+                draft.rating = data.rating;
                 draft.reviews = [data.review, ...draft.reviews];
                 return draft;
               }

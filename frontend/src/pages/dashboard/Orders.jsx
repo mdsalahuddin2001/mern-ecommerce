@@ -12,7 +12,7 @@ const statusBadge = (status) => {
     <span className="px-4 py-1 text-xs font-bold text-[#4ADE80] rounded-full bg-[#4ADE80]/10">
       Delivered
     </span>
-  ) : status === "declined" ? (
+  ) : status === "cancelled" ? (
     <span className="px-4 py-1 text-xs font-bold text-[#F87171] rounded-full bg-[#F87171]/10">
       Cancelled
     </span>
@@ -128,7 +128,7 @@ const Orders = () => {
                             >
                               <option value="pending">Pending</option>
                               <option value="delivered">Delivered</option>
-                              <option value="declined">Declined</option>
+                              <option value="cancelled">Cancelled</option>
                             </select>
                           </div>
                         </td>

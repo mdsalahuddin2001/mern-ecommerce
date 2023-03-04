@@ -27,19 +27,28 @@ export const ordersApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    placeOrder: builder.mutation({
-      query: (data) => ({
-        url: "/orders",
-        method: "POST",
-        body: data,
-      }),
-    }),
+
     changeStatus: builder.mutation({
       query: ({ status, id }) => ({
         url: `/orders/status/${id}`,
         method: "POST",
         body: { status },
       }),
+      onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
+        const { status, id } = arg;
+        const patchResult = dispatch(
+          apiSlice.util.updateQueryData("getOrders", undefined, (draft) => {
+            draft.orders = draft.orders.map((order) =>
+              order.id === id ? { ...order, status } : order
+            );
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          patchResult.undo();
+        }
+      },
     }),
   }),
 });

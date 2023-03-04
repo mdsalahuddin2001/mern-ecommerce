@@ -27,6 +27,20 @@ export const ordersApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    placeOrder: builder.mutation({
+      query: (data) => ({
+        url: "/orders",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    changeStatus: builder.mutation({
+      query: ({ status, id }) => ({
+        url: `/orders/status/${id}`,
+        method: "POST",
+        body: { status },
+      }),
+    }),
   }),
 });
 
@@ -35,4 +49,5 @@ export const {
   useGetOrderQuery,
   useGetMyOrdersQuery,
   useGetOrdersQuery,
+  useChangeStatusMutation,
 } = ordersApi;

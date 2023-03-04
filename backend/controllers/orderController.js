@@ -51,3 +51,13 @@ exports.placeOrder = async (req, res, next) => {
   });
   res.status(200).json(order);
 };
+// @desc      Change Order
+// @route     POST /api/v1/orders/:id
+// @access    Public
+exports.changeStatus = async (req, res, next) => {
+  const { status } = req.body;
+
+  //   Create user
+  const order = await Order.findByIdAndUpdate(req.params.id, { status });
+  res.status(200).json(order);
+};

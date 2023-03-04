@@ -1,4 +1,7 @@
-import { useGetOrdersQuery } from "../../features/orders/ordersApi";
+import {
+  useChangeStatusMutation,
+  useGetOrdersQuery,
+} from "../../features/orders/ordersApi";
 import Alert from "../../components/ui/Alert";
 import { AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -9,7 +12,7 @@ const statusBadge = (status) => {
     <span className="px-4 py-1 text-xs font-bold text-[#4ADE80] rounded-full bg-[#4ADE80]/10">
       Delivered
     </span>
-  ) : status === "cancelled" ? (
+  ) : status === "declined" ? (
     <span className="px-4 py-1 text-xs font-bold text-[#F87171] rounded-full bg-[#F87171]/10">
       Cancelled
     </span>
@@ -22,6 +25,10 @@ const statusBadge = (status) => {
 const Orders = () => {
   const { isLoading, data, isError, error } = useGetOrdersQuery();
   // decide what to render
+  const [changeStatus, {}] = useChangeStatusMutation();
+  const handleStatusChange = (e, { id }) => {
+    changeStatus({ id, status: e.target.value });
+  };
   let content = null;
   if (isLoading) {
     content = <h1 className="text-4xl">Loading...</h1>;
@@ -108,13 +115,21 @@ const Orders = () => {
                           <div className="flex items-center space-x-2">
                             <Link
                               to={`/orders/${order._id}`}
-                              className="flex items-center px-4 py-1 text-xs text-white text-green-400 bg-black rounded hover:text-green-600"
+                              className="flex items-center px-4 py-1 text-xs text-white text-green-400 bg-[#333] rounded hover:text-green-600 form-input max-w-[120px] justify-center"
                             >
                               <AiFillEye className="mr-1 text-lg" /> Details
                             </Link>
-                            <button className="text-lg text-red-400 hover:text-red-600">
-                              {/* <RiDeleteBin6Fill /> */}
-                            </button>
+                            <select
+                              className="form-input max-w-[200px]"
+                              defaultValue={order.status}
+                              onChange={(e) =>
+                                handleStatusChange(e, { id: order._id })
+                              }
+                            >
+                              <option value="pending">Pending</option>
+                              <option value="delivered">Delivered</option>
+                              <option value="declined">Declined</option>
+                            </select>
                           </div>
                         </td>
                       </tr>
